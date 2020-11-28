@@ -24,11 +24,11 @@ if(isset($_GET['e']) && $_GET['e']=='yes'){
         <form action="b.php"  method="post">
         <div class="form-group">
         <label for="libelle">Libellé</label>
-            <input type="text" class="form-control" name="libelle" id="libelle" >
+            <input type="text" class="form-control" name="libelle" id="libelle" required >
         </div>
         <div class="form-group">
         <label for="prix">Prix</label>
-        <input type="text" class="form-control" name="prix" id="prix"></div>
+        <input type="number" class="form-control" name="prix" id="prix" required></div>
         <div  class="text-center" >
 <button class="btn btn-sm btn-primary col-6 ">valider</button>    
         </div>
@@ -38,8 +38,8 @@ if(isset($_GET['e']) && $_GET['e']=='yes'){
     
     </div>
 <hr>
-<a href="c.php?lib=hp&id=12" class="btn btn-warning">HP</a>
-<a href="c.php?lib=dell&id=10" class="btn btn-warning">DELL</a>    
+<a href="b.php?lib=hp&id=12" class="btn btn-warning">HP</a>
+<a href="b.php?lib=dell&id=10" class="btn btn-warning">DELL</a>    
 
 </div>
 </body>

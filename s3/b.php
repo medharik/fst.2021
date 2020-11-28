@@ -19,5 +19,9 @@ $prix=$_POST['prix'];
 <?php if(isset($libelle) && isset($prix)) { ?>
 <h3>Le prix du produit   <?php echo $libelle?> est <?=$prix?> DHS</h3>
 <?php }?>
+<?php if(isset($_GET['lib'])) {?>
+    <h3>Le lib est : <?=$GET['lib']?> </h3>
+
+<?php  }  ?>
 </body>
 </html>
