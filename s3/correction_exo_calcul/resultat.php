@@ -11,7 +11,7 @@ die();
 }else if(empty($prix) || empty($qte)){
     header("location:form.php?e=2");
     die();
-
+ 
 }else if(!is_numeric($prix) ||  !is_numeric($qte)){
 header("location:form.php?e=3");
 die();
@@ -28,5 +28,6 @@ die();
     
 <h3 style="text-align:center;color:green"> LE TTC EST : <?=$prix*$qte?>DHS
 </h3>
+
 </body>
 </html>
