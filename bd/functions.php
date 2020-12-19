@@ -31,4 +31,77 @@ function ajouter_produit(string $libelle, float $prix, int $qtestock = 0)
     }
 }
 
-// department (id,department_name,adresse)
+// suppression par id 
+
+function supprimer_produit($id)
+{
+    try {
+        //connexion db 
+        $cnx = connecter_db();
+        //preparer la requete
+        $rp = $cnx->prepare("delete from produit where id =?"); //protection contre l'injection SQL 
+
+        //exection de la requete dans la cnx 
+        $rp->execute([$id]);
+    } catch (PDOException $e) {
+        echo "Erreur de suppression du produit dans la bd " . $e->getMessage();
+    }
+}
+
+
+//modification 
+function modifier_produit(int $id, string $libelle, float $prix, int $qtestock = 0)
+{
+    try {
+        //connexion db 
+        $cnx = connecter_db();
+        //preparer la requete
+        $rp = $cnx->prepare("update produit set libelle =? , prix =? , qtestock=? where id=?"); //protection contre l'injection SQL 
+
+        //exection de la requete dans la cnx 
+        $rp->execute([$libelle, $prix, $qtestock, $id]);
+    } catch (PDOException $e) {
+        echo "Erreur de modification  de produit dans la bd " . $e->getMessage();
+    }
+}
+
+
+//liste des produits 
+function all()
+{
+    try {
+        //connexion db 
+        $cnx = connecter_db();
+        //preparer la requete
+        $rp = $cnx->prepare("select * from produit order by id desc"); //protection contre l'injection SQL 
+
+        //exection de la requete dans la cnx 
+        $rp->execute([]);
+        //extraction fetchAll
+        $resultat = $rp->fetchAll(); //liste 
+        return $resultat;
+    } catch (PDOException $e) {
+        echo "Erreur de selection  des produits  " . $e->getMessage();
+    }
+}
+
+
+
+//consulter un produit par son id 
+function find($id)
+{
+    try {
+        //connexion db 
+        $cnx = connecter_db();
+        //preparer la requete
+        $rp = $cnx->prepare("select * from produit where id=?"); //protection contre l'injection SQL 
+
+        //exection de la requete dans la cnx 
+        $rp->execute([$id]);
+        //extraction fetchAll
+        $resultat = $rp->fetch(); //liste 
+        return $resultat;
+    } catch (PDOException $e) {
+        echo "Erreur de selection  du produit ayant l'id=$id  " . $e->getMessage();
+    }
+}
