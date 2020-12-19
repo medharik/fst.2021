@@ -19,8 +19,10 @@ $produit2=['libelle'=>'dell saltellite 6','prix'=>7000,
 // logique : ensemble de donnees structurées (SQL : tables (colonnes) , NOSQL : collection et des document)
 // physique : (data entregistees le DD) => persitence
 // LDD , LMD , LCD , LID , LTD
-//SQL : Langage  de requetes  structurees 
+//SQL : Langage  de requetes  structurees
+// SGBDR : SYSTEME DE GESTION DE BASE DE DONNEES :  ACCESS (client) , SQLSERVER , oracle , MYSQL
 //$produit2['config']=['processeur'=>'core i5','ram'=>'4GO'];
+
 $produit3=$produit1;
 $produit3['libelle']='sony vaio';
 $listes=[

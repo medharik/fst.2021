@@ -13,4 +13,17 @@
 //     )
 //insert INTO produit (libelle,prix) values('hp dv 7',9000)
 // SELECT * FROM produit
+// -- creation de la table produit
+// CREATE TABLE produit(
+// id INT PRIMARY KEY auto_increment,
+// libelle VARCHAR(100),
+// prix float,
+// qtestock INT DEFAULT 0,
+// chemin VARCHAR(100) DEFAULT 'images/icon.jpg' 
+
+
+
+// )
+// DESC  produit
+
 ?>
