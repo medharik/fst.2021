@@ -1,5 +1,5 @@
 <?php
-session_start();
+include("functions.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +15,7 @@ session_start();
 
     <?php include_once("_menu.php"); ?>
     <div class="container">
-        Bienvenue <?= $_SESSION['nom']; ?>
+        Bienvenue <?= $_SESSION['prenom']; ?>
         <form action="store.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6 mx-auto shadow mt-5 rounded">

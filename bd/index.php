@@ -1,5 +1,7 @@
 <?php
 include("functions.php");
+demarrer_session();
+verifier_acces($_SESSION['login'], $_SESSION['passe']);
 $produits = all();
 $message = "";
 $classe = "d-none";
@@ -24,6 +26,7 @@ if (isset($_GET['op']) && $_GET['op'] == 'modif') {
 </head>
 
 <body>
+
     <?php include("_menu.php") ?>
     <div class="container">
 

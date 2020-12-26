@@ -10,12 +10,18 @@
 
 <body>
     <div class="container">
+        <?php
+        if (isset($_GET['cn']) && $_GET['cn'] == 'no') {
+
+        ?>
+            <div class="alert alert-danger">Login/Mot de passe incorrects</div>
+        <?php } ?>
         <form action="check_login.php" method="post">
             <div class="row">
                 <div class="col-md-6 shadow mx-auto p-2">
                     <div>
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" name="login" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="exampleInputEmail1" class="form-label">Login</label>
+                        <input type="text" class="form-control" name="login" id="exampleInputEmail1" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>

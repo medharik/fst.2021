@@ -1,5 +1,6 @@
 <?php
 // fonction de connection bd
+//med.harik@gmail.com
 function connecter_db()
 {
     // ERR_MODE : warning_mode , silent_mode , exception_mode
@@ -106,6 +107,39 @@ function find($id)
         $rp->execute([$id]);
         //extraction fetchAll
         $resultat = $rp->fetch(); //liste 
+        return $resultat;
+    } catch (PDOException $e) {
+        echo "Erreur de selection  du produit ayant l'id=$id  " . $e->getMessage();
+    }
+}
+//demarrer une session 
+function demarrer_session()
+{
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+}
+
+function verifier_acces($login, $passe)
+{
+    try {
+        //connexion db 
+        $cnx = connecter_db();
+        //preparer la requete
+        $rp = $cnx->prepare("select * from users where login=? and passe = ?"); //protection contre l'injection SQL 
+
+        //exection de la requete dans la cnx 
+        $rp->execute([$login, $passe]);
+        //extraction fetchAll
+        $resultat = $rp->fetch(); //liste 
+        if (empty($resultat)) {
+            header("location:login.php?cn=no");
+        } else {
+            demarrer_session();
+            $_SESSION['prenom'] = $resultat['prenom'];
+            $_SESSION['passe'] = $resultat['passe'];
+            $_SESSION['login'] = $resultat['login'];
+        }
         return $resultat;
     } catch (PDOException $e) {
         echo "Erreur de selection  du produit ayant l'id=$id  " . $e->getMessage();

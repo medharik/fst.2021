@@ -17,7 +17,7 @@ print_r($produit);
 </head>
 
 <body>
-
+    <?php include_once("_menu.php"); ?>
     <div class="container">
         <h2 class="text-center">Détails du produit : <?= $produit['libelle'] ?> </h2>
         <div class="card" style="width: 18rem;">

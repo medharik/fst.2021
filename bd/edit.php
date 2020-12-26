@@ -13,6 +13,8 @@
 // create=>store
 // edit=>update
 include('functions.php');
+demarrer_session();
+verifier_acces($_SESSION['login'], $_SESSION['passe']);
 $id = $_GET['id'];
 $produit =  find($id);
 ?>
