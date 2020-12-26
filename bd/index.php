@@ -33,6 +33,7 @@ if (isset($_GET['op']) && $_GET['op'] == 'modif') {
             <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Image</th>
                     <th scope="col">Libelle</th>
                     <th scope="col">prix</th>
                     <th scope="col">qte en stock</th>
@@ -43,6 +44,7 @@ if (isset($_GET['op']) && $_GET['op'] == 'modif') {
                 <?php foreach ($produits as $ligne) { ?>
                     <tr>
                         <th scope="row"><?= $ligne['id'] ?></th>
+                        <th scope="row"><img width="150" src="<?= $ligne['chemin'] ?>" alt=""></th>
                         <td><?= $ligne['libelle'] ?></td>
                         <td><?= $ligne['prix'] ?></td>
                         <td><?= $ligne['qtestock'] ?></td>

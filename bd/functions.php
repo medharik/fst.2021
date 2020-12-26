@@ -21,17 +21,17 @@ function connecter_db()
 
 // fonction d'ajout  d'un record produit
 
-function ajouter_produit(string $libelle, float $prix, int $qtestock = 0)
+function ajouter_produit(string $libelle, float $prix, int $qtestock = 0, $chemin)
 {
     try {
         //connexion db 
         $cnx = connecter_db();
         //preparer la requete
-        $rp = $cnx->prepare("insert into produit(libelle,prix,qtestock) values(?,?,?)");
+        $rp = $cnx->prepare("insert into produit(libelle,prix,qtestock,chemin) values(?,?,?,?)");
         //protection contre l'injection SQL 
 
         //exection de la requete dans la cnx 
-        $rp->execute([$libelle, $prix, $qtestock]);
+        $rp->execute([$libelle, $prix, $qtestock, $chemin]);
     } catch (PDOException $e) {
         echo "Erreur d'ajout de produit dans la bd " . $e->getMessage();
     }
@@ -110,4 +110,20 @@ function find($id)
     } catch (PDOException $e) {
         echo "Erreur de selection  du produit ayant l'id=$id  " . $e->getMessage();
     }
+}
+
+
+//$info: Array ( [name] => 7070.png_860.png [type] => image/png [tmp_name] => C:\Users\HARIK\AppData\Local\Temp\php1B94.tmp [error] => 0 [size] => 240100 ) 
+function uploader($infos)
+{
+    $nom = $infos['name'];
+
+    $tmp = $infos['tmp_name'];
+    $infos = pathinfo($nom);
+    $ext = $infos['extension'];
+
+    $new_name = md5(time() . $nom . rand(0, 99999)) . '.' . $ext;
+
+    move_uploaded_file($tmp, "images/$new_name");
+    return "images/$new_name";
 }

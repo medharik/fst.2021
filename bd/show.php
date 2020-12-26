@@ -20,10 +20,14 @@ print_r($produit);
 
     <div class="container">
         <h2 class="text-center">Détails du produit : <?= $produit['libelle'] ?> </h2>
-        <p>
-            Prix : <?= $produit['prix'] ?> <br>
-            Quantite : <?= $produit['qtestock'] ?>
-        </p>
+        <div class="card" style="width: 18rem;">
+            <img src="<?= $produit['chemin'] ?>" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><?= $produit['libelle'] ?></h5>
+                <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                <a href="#" onclick="history.go(-1)" class="btn btn-primary">Précedent</a>
+            </div>
+        </div>
 
     </div>
 

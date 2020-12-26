@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,9 +12,11 @@
 </head>
 
 <body>
+
     <?php include_once("_menu.php"); ?>
     <div class="container">
-        <form action="store.php" method="post">
+        Bienvenue <?= $_SESSION['nom']; ?>
+        <form action="store.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6 mx-auto shadow mt-5 rounded">
                     <div class="mb-3">
@@ -26,6 +31,11 @@
                         <label for="qtestock" class="form-label">Quantité en stock</label>
                         <input type="number" name="qtestock" class="form-control" id="qtestock" required placeholder="0">
                     </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" name="image" class="form-control" id="image">
+                    </div>
+
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary ">Valider</button>
                     </div>
