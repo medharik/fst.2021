@@ -1,8 +1,15 @@
 <?php
 include("functions.php");
 $produits = all();
+$message = "";
+$classe = "d-none";
 if (isset($_GET['op']) && $_GET['op'] == 'ajout') {
-    echo "Ajout OK";
+    $classe = "alert-success";
+    $message = "Ajout OK";
+}
+if (isset($_GET['op']) && $_GET['op'] == 'modif') {
+    $message = "Modification  OK";
+    $classe = "alert-warning";
 }
 // dep(id,nom)
 ?>
@@ -19,6 +26,8 @@ if (isset($_GET['op']) && $_GET['op'] == 'ajout') {
 <body>
     <?php include("_menu.php") ?>
     <div class="container">
+
+        <div class="alert <?= $classe ?>"><?= $message ?></div>
         <h2 class="text-center">Liste des <?= count($produits); ?> produits </h2>
         <table class="table table-dark">
             <thead>
@@ -37,9 +46,14 @@ if (isset($_GET['op']) && $_GET['op'] == 'ajout') {
                         <td><?= $ligne['libelle'] ?></td>
                         <td><?= $ligne['prix'] ?></td>
                         <td><?= $ligne['qtestock'] ?></td>
-                        <td><a href="" class="btn btn-primary">C</a>
-                            <a href="" class="btn btn-warning">M</a>
-                            <a onclick="return confirm('supprimer ?')" href="delete.php?id=<?= $ligne['id'] ?>" class="btn btn-danger">S</a></td>
+                        <td><a href="show.php?id=<?= $ligne['id'] ?>" class="btn btn-primary">C</a>
+                            <a href="edit.php?id=<?= $ligne['id'] ?>    " class="btn btn-warning">M</a>
+                            <form action="delete.php" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="<?= $ligne['id'] ?>">
+                                <button class="btn btn-danger" onclick="return confirm('supprimer ?')">D</button>
+                            </form>
+                            <a onclick="return confirm('supprimer ?')" href="delete.php?id=<?= $ligne['id'] ?>" class="btn btn-danger">S</a>
+                        </td>
                     </tr>
                 <?php } ?>
 

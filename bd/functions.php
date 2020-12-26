@@ -5,8 +5,13 @@ function connecter_db()
     // ERR_MODE : warning_mode , silent_mode , exception_mode
 
     try {
-        $cnx = new PDO("mysql:host=localhost;dbname=db_produit", 'root', '');
-        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $options = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ];
+        $cnx = new PDO("mysql:host=localhost;dbname=db_produit", 'root', '', $options);
+        // $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // $cnx->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         echo 'Erreur de connexion bd ' . $e->getMessage();
     }
@@ -22,7 +27,8 @@ function ajouter_produit(string $libelle, float $prix, int $qtestock = 0)
         //connexion db 
         $cnx = connecter_db();
         //preparer la requete
-        $rp = $cnx->prepare("insert into produit(libelle,prix,qtestock) values(?,?,?)"); //protection contre l'injection SQL 
+        $rp = $cnx->prepare("insert into produit(libelle,prix,qtestock) values(?,?,?)");
+        //protection contre l'injection SQL 
 
         //exection de la requete dans la cnx 
         $rp->execute([$libelle, $prix, $qtestock]);
@@ -33,7 +39,7 @@ function ajouter_produit(string $libelle, float $prix, int $qtestock = 0)
 
 // suppression par id 
 
-function supprimer_produit($id)
+function supprimer_produit(int $id)
 {
     try {
         //connexion db 
@@ -76,7 +82,7 @@ function all()
         $rp = $cnx->prepare("select * from produit order by id desc"); //protection contre l'injection SQL 
 
         //exection de la requete dans la cnx 
-        $rp->execute([]);
+        $rp->execute();
         //extraction fetchAll
         $resultat = $rp->fetchAll(); //liste 
         return $resultat;
